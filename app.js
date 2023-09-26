@@ -3,8 +3,11 @@ const config = require('config')
 const mongoose = require('mongoose')
 
 const app = express()
+app.use(express.json()) 
 
 app.use('/api', require('./routes/auth.route'))
+app.use('/api', require('./routes/hobby.route'))
+
 const PORT = config.get('PORT') || 3001
 
 const start = async () => {

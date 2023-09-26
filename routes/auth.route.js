@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { User } = require('../entities/User')
+const User = require('../entities/User')
 const bcrypt = require('bcryptjs')
 const {check, validationResult} = require('express-validator')
 const jwt = require('jsonwebtoken')
@@ -41,7 +41,7 @@ router.post('/auth',
                 { expiresIn: '1h' }
             )
 
-            res.json( {token, userId: user.id} )
+            res.json( {token, userId: user.id, hobby: user.hobbies} )
         } catch (error) {
             res.status(500).json( {message: 'Произошла ошибка регистрации'} )
     }
@@ -64,9 +64,11 @@ router.post('/register',
                     message: 'Некорректные данные при регистрации'
                 })
             }
+            
             const {email, password} = req.body
+            
             //ищем пользователя с таким email
-            const newUser = await User.findOne( {email} )
+            const newUser = await User.findOne( {email} ).exec()
             if (newUser) {
                 return res.status(400).json( {message: 'Пользователь с таким email уже существует'} )
             }
@@ -74,7 +76,6 @@ router.post('/register',
             const hashPassword = await bcrypt.hash(password, 16)
             const user = new User( {email, password: hashPassword} )
             await user.save()
-
             res.status(201).json( {message: 'Пользователь успешно создан'} )
         } catch (error) {
             res.status(500).json( {message: 'Произошла ошибка регистрации'} )
