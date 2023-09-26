@@ -1,0 +1,5 @@
+{
+    "PORT" : 3000,
+    //"HOST_DB" : "mongodb+srv://asryanaram1994:Aa1r6m0e4nia@cluster0.hcsimbu.mongodb.net/"
+    "HOST_DB" : "mongodb://127.0.0.1:27017"
+}
