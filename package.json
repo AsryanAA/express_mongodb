@@ -1,0 +1,11 @@
+{
+  "name": "express_mongodb",
+  "version": "1.0.0",
+  "description": "rest_api express mongodb",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Asryan AA 2023",
+  "license": "ISC"
+}
